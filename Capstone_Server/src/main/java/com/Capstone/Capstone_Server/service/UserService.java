@@ -23,5 +23,13 @@ public class UserService {
 		}
 		return userRepository.save(userEntity);
 	}
+	
+	public UserEntity findByUsernameAndPassword(String username, String password) {
+		if(username == null || password == null) {
+			log.warn("No blank plz");
+			throw new RuntimeException("No blank");
+		}
+		return userRepository.findByUsernameAndPassword(username, password);
+	}
 
 }

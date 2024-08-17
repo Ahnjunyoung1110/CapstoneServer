@@ -8,4 +8,5 @@ import com.Capstone.Capstone_Server.model.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity,String> {
 	public boolean existsByUsername(String Username);
+	public UserEntity findByUsernameAndPassword(String Username, String password);
 }
