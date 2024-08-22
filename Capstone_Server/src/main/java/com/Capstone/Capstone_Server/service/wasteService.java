@@ -1,6 +1,7 @@
 package com.Capstone.Capstone_Server.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,24 @@ public class wasteService {
 			throw new RuntimeException("Such waste does not exits");
 		}
 		wasteRepository.delete(wasteEntity);
+		return findAllWasteEntityByUsername(wasteEntity.getUserId());
+	}
+
+	// waste를 업테이트
+	public List<wasteEntity> updateWaste(final wasteEntity wasteEntity) {
+		validate(wasteEntity);
+		
+		final Optional<wasteEntity> original = wasteRepository.findById(wasteEntity.getId());
+
+		if (original.isPresent()) { // 존재 한다면
+			final wasteEntity todo = original.get();
+			todo.setWasteType(wasteEntity.getWasteType());
+			todo.setBeacon(wasteEntity.getBeacon());
+			todo.setDate(wasteEntity.getDate());
+			todo.setSituation(wasteEntity.getSituation());
+
+			wasteRepository.save(todo);
+		}
 		return findAllWasteEntityByUsername(wasteEntity.getUserId());
 	}
 

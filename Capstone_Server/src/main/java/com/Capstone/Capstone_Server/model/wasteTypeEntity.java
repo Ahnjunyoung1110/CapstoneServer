@@ -12,9 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+
+//폐기물의 종류에 대한 entity
+//각 종류에 따라 종류별 보관 기일 설정.
 public class wasteTypeEntity {
 	@Id
 	String Type;
 	
 	int day;
+	
 }
