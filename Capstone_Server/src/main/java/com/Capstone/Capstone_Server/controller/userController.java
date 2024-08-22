@@ -2,6 +2,7 @@ package com.Capstone.Capstone_Server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +55,17 @@ public class userController {
 		String token =tokenProvider.createToken(userEntity);
 		
 		UserDTO responseDto = UserDTO.builder().token(token).build();
+		return ResponseEntity.ok().body(responseDto);
+	}
+	
+	//회원탈퇴 하는 메소드
+	@DeleteMapping("/signout")
+	public ResponseEntity<?> siginOut(@RequestBody UserDTO userDTO){
+		UserEntity userEntity = userService.findByUsernameAndPassword(userDTO.getUsername(), userDTO.getPassword());
+		UserEntity deletedEntity = userService.delete(userEntity);
+		
+		
+		UserDTO responseDto = UserDTO.builder().id(deletedEntity.getId()).password(deletedEntity.getPassword()).build();
 		return ResponseEntity.ok().body(responseDto);
 	}
 }
