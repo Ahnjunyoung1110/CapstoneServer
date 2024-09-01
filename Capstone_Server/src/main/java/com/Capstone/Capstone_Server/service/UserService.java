@@ -32,4 +32,17 @@ public class UserService {
 		return userRepository.findByUsernameAndPassword(username, password);
 	}
 
+	public UserEntity delete(UserEntity userEntity) {
+		if(userEntity == null || userEntity.getUsername() == null) {
+			throw new RuntimeException("There is a blank space");
+		}
+		if(!userRepository.existsByUsername(userEntity.getUsername())) {
+			log.warn("username not exits {}",userEntity.getUsername());
+			throw new RuntimeException("Username already exits");
+		}
+		UserEntity deletedEntity = UserEntity.builder().id(userEntity.getId()).password(userEntity.getPassword()).build();
+		userRepository.delete(userEntity);
+		return deletedEntity;
+	}
+
 }
