@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class wasteEntity {
 	@Id //기본키
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "YYYYMMDD+Owncode")
-	@GenericGenerator(name = "YYYYMMDD+Owncode", strategy = "com.Capstone.Capstone_Server.service.wasteIdGenerator")
+	@GenericGenerator(name = "YYYYMMDD+Owncode", strategy = "com.Capstone.Capstone_Server.service.generator.wasteIdGenerator")
 	private String id;
 	
 	@Column(nullable = false)
@@ -39,7 +39,8 @@ public class wasteEntity {
 	@Column(nullable = false)
 	String userId;
 	
-	@Column(nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "YYYYMMDD")
+	@GenericGenerator(name = "YYYYMMDD+Owncode", strategy = "com.Capstone.Capstone_Server.service.generator.DateGenerator")
 	String date;
 	
 	@Column(nullable = false)

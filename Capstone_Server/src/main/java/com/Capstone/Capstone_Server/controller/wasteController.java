@@ -100,7 +100,7 @@ public class wasteController {
 	@DeleteMapping
 	public ResponseEntity<?> deleteWaste(@AuthenticationPrincipal String userId, @RequestBody wasteDTO DTO) {
 		try {
-			wasteEntity entity = wasteDTO.toEntity(DTO, wasteTypeService.findType(DTO.getWasteType()));
+			wasteEntity entity = wasteEntity.builder().id(DTO.getId()).build();
 			entity.setUserId(userId);
 
 			List<wasteEntity> entities = wasteservice.deleteWaste(entity);

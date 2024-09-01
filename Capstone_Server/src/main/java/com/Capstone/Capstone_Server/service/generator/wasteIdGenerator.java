@@ -1,4 +1,4 @@
-package com.Capstone.Capstone_Server.service;
+package com.Capstone.Capstone_Server.service.generator;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -22,7 +22,7 @@ public class wasteIdGenerator implements IdentifierGenerator {
 			lastGeneratedDate = nowDate;
 		}
 		int number = counter.incrementAndGet();	
-		String tS = number + "";
-		return nowDate + tS;
+		String formattedNumber = String.format("%03d", number);
+		return nowDate + formattedNumber;
 	}
 }
